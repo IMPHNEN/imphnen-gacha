@@ -5,6 +5,7 @@ type TInputSize = "sm" | "md" | "lg";
 
 type TInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   size?: TInputSize;
+  error?: string;
 };
 
 const sizeClasses: Record<TInputSize, string> = {
@@ -13,21 +14,36 @@ const sizeClasses: Record<TInputSize, string> = {
   lg: "text-[15px] max-h-[34px]",
 };
 
-const disabledClass = "";
+const disabledClass = "opacity-50 hover:border-neutral-200 cursor-not-allowed";
+const errorClass = "border-danger-500 hover:border-danger-500 focus:outline-danger-500";
 
 export const Input: FC<TInputProps> = ({
   size = "md",
   type,
+  placeholder = "Placeholder",
   disabled,
+  error,
   className,
   ...rest
 }): ReactElement => {
   const mergedClassName = cn(
-    "px-[12px] py-[8px] text-neutral-300 border border-neutral-200 rounded-md font-bai-jamjuree",
-    sizeClasses[size as TInputSize],
+    "px-[12px] py-[8px] text-neutral-800 placeholder:text-neutral-300 border border-neutral-200 hover:border-blue-300 focus:outline-1 focus:outline-blue-500 rounded-md font-bai-jamjuree",
+    sizeClasses[size],
     disabled && disabledClass,
+    error && errorClass,
     className,
   );
 
-  return <input className={mergedClassName} type={type} disabled={disabled} {...rest} />;
+  return (
+    <div>
+      <input
+        className={mergedClassName}
+        type={type}
+        disabled={disabled}
+        placeholder={placeholder}
+        {...rest}
+      />
+      {error && <p className="text-danger-500 text-xs mt-1">{error}</p>}
+    </div>
+  );
 };

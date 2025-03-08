@@ -5,6 +5,10 @@ const meta: Meta<typeof Input> = {
   title: "Components/Input",
   component: Input,
   argTypes: {
+    type: {
+      control: "select",
+      options: ["text", "number", "email", "password"],
+    },
     size: {
       control: "select",
       options: ["sm", "md", "lg"],
@@ -33,5 +37,49 @@ export const Small: Story = {
   args: {
     size: "sm",
     placeholder: "Placeholder",
+  },
+};
+
+export const TextInput: Story = {
+  args: {
+    size: "md",
+    type: "text",
+  },
+};
+
+export const NumberInput: Story = {
+  args: {
+    size: "md",
+    type: "number",
+  },
+};
+
+export const EmailInput: Story = {
+  args: {
+    size: "md",
+    type: "email",
+  },
+};
+
+export const PasswordInput: Story = {
+  args: {
+    size: "md",
+    type: "password",
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    size: "md",
+    type: "text",
+    disabled: true,
+  },
+};
+
+export const WithError: Story = {
+  args: {
+    size: "md",
+    type: "text",
+    error: "This field is required",
   },
 };
