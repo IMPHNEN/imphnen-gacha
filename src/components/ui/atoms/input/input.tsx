@@ -3,7 +3,10 @@ import { cn } from "@/libs/tailwind-merge/cn";
 
 type TInputSize = "sm" | "md" | "lg";
 
-type TInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
+type TInputProps = Omit<
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+  "size"
+> & {
   size?: TInputSize;
   error?: string;
 };
