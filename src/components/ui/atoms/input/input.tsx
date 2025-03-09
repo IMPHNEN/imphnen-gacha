@@ -1,12 +1,14 @@
 import { DetailedHTMLProps, FC, InputHTMLAttributes, ReactElement } from "react";
 import { cn } from "@/libs/tailwind-merge/cn";
 
+type TInputType = "text" | "email";
 type TInputSize = "sm" | "md" | "lg";
 
 type TInputProps = Omit<
   DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
-  "size"
+  "size" | "type"
 > & {
+  type?: TInputType;
   size?: TInputSize;
   error?: string;
 };
@@ -38,7 +40,7 @@ export const Input: FC<TInputProps> = ({
   );
 
   return (
-    <div>
+    <>
       <input
         className={mergedClassName}
         type={type}
@@ -47,6 +49,6 @@ export const Input: FC<TInputProps> = ({
         {...rest}
       />
       {error && <p className="text-danger-500 text-xs mt-1">{error}</p>}
-    </div>
+    </>
   );
 };

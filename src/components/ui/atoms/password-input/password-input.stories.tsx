@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Input } from "./input";
+import { PasswordInput } from "./password-input";
 
-const meta: Meta<typeof Input> = {
-  title: "Components/Input",
-  component: Input,
+const meta: Meta<typeof PasswordInput> = {
+  title: "Components/Password Input",
+  component: PasswordInput,
   argTypes: {
     type: {
       control: "select",
@@ -17,7 +17,7 @@ const meta: Meta<typeof Input> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Input>;
+type Story = StoryObj<typeof PasswordInput>;
 
 export const Large: Story = {
   args: {
@@ -40,24 +40,18 @@ export const Small: Story = {
   },
 };
 
-export const TextInput: Story = {
+export const Input: Story = {
   args: {
-    size: "md",
-    type: "text",
-  },
-};
-
-export const EmailInput: Story = {
-  args: {
-    size: "md",
-    type: "email",
+    size: "sm",
+    type: "password",
+    placeholder: "Placeholder",
   },
 };
 
 export const Disabled: Story = {
   args: {
     size: "md",
-    type: "text",
+    type: "password",
     disabled: true,
   },
 };
@@ -65,7 +59,7 @@ export const Disabled: Story = {
 export const WithError: Story = {
   args: {
     size: "md",
-    type: "text",
+    type: "password",
     error: "This field is required",
   },
 };
