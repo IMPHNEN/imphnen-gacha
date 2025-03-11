@@ -5,10 +5,6 @@ const meta: Meta<typeof PasswordInput> = {
   title: "Components/Password Input",
   component: PasswordInput,
   argTypes: {
-    type: {
-      control: "select",
-      options: ["text", "number", "email", "password"],
-    },
     size: {
       control: "select",
       options: ["sm", "md", "lg"],
@@ -43,7 +39,6 @@ export const Small: Story = {
 export const Input: Story = {
   args: {
     size: "sm",
-    type: "password",
     placeholder: "Placeholder",
   },
 };
@@ -51,7 +46,6 @@ export const Input: Story = {
 export const Disabled: Story = {
   args: {
     size: "md",
-    type: "password",
     disabled: true,
   },
 };
@@ -59,7 +53,6 @@ export const Disabled: Story = {
 export const WithError: Story = {
   args: {
     size: "md",
-    type: "password",
     error: "This field is required",
   },
 };

@@ -2,7 +2,6 @@ import { DetailedHTMLProps, FC, InputHTMLAttributes, ReactElement, useState } fr
 import { cn } from "@/libs/tailwind-merge/cn";
 import { Button } from "../button";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-import { InputGroup } from "../input-group";
 
 type TPasswordInputType = "password";
 type TPasswordInputSize = "sm" | "md" | "lg";
@@ -22,8 +21,15 @@ const sizeClasses: Record<TPasswordInputSize, string> = {
   lg: "text-[15px] max-h-[34px]",
 };
 
+const iconSizeClasses: Record<TPasswordInputSize, string> = {
+  sm: "text-[10px]",
+  md: "text-[12px]",
+  lg: "text-[16px]",
+};
+
 const disabledClass = "opacity-50 hover:border-neutral-200 cursor-not-allowed";
-const errorClass = "border-danger-500 hover:border-danger-500 focus:outline-danger-500";
+const errorClass =
+  "placeholder:text-danger-500 text-danger-500 border-danger-500 hover:border-danger-500 focus:outline-danger-500";
 
 export const PasswordInput: FC<TPasswordInputProps> = ({
   size = "md",
@@ -36,11 +42,11 @@ export const PasswordInput: FC<TPasswordInputProps> = ({
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
+    if (!disabled) setShowPassword((prev) => !prev);
   };
 
   const mergedClassName = cn(
-    "pl-[12px] py-[8px] text-neutral-800 placeholder:text-neutral-300 border border-neutral-200 hover:border-blue-300 focus:outline-1 focus:outline-blue-500 rounded-md font-bai-jamjuree",
+    "px-[12px] py-[8px] text-neutral-800 placeholder:text-neutral-300 border border-neutral-200 hover:border-blue-300 focus:outline-1 focus:outline-blue-500 rounded-md font-bai-jamjuree",
     sizeClasses[size],
     disabled && disabledClass,
     error && errorClass,
@@ -49,7 +55,12 @@ export const PasswordInput: FC<TPasswordInputProps> = ({
 
   return (
     <>
-      <InputGroup className={mergedClassName}>
+      <div
+        className={cn(
+          "relative inline-flex items-center border border-neutral-200 rounded-md",
+          mergedClassName,
+        )}
+      >
         <input
           className="focus:outline-0"
           type={showPassword ? "text" : "password"}
@@ -57,15 +68,29 @@ export const PasswordInput: FC<TPasswordInputProps> = ({
           placeholder={placeholder}
           {...rest}
         />
-        <Button
-          variant="text"
-          size={size}
-          onClick={togglePasswordVisibility}
-          className="max-h-[28px]"
-        >
-          {showPassword ? <EyeInvisibleOutlined /> : <EyeOutlined />}
-        </Button>
-      </InputGroup>
+        <div className="absolute end-0 px-[12px] h-full flex items-center">
+          <Button
+            variant="text"
+            size={size}
+            onClick={togglePasswordVisibility}
+            className={cn("relative aspect-square -me-[10px] p-[6px]", iconSizeClasses[size])}
+          >
+            {showPassword ? (
+              <EyeInvisibleOutlined
+                style={{
+                  color: error ? "var(--color-danger-500)" : "var(--color-neutral-500)",
+                }}
+              />
+            ) : (
+              <EyeOutlined
+                style={{
+                  color: error ? "var(--color-danger-500)" : "var(--color-neutral-500)",
+                }}
+              />
+            )}
+          </Button>
+        </div>
+      </div>
       {error && <p className="text-danger-500 text-xs mt-1">{error}</p>}
     </>
   );
