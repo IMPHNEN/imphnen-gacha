@@ -6,7 +6,7 @@ export const Navbar: FC = (): ReactElement => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   
   return (
-    <header className="bg-white shadow-sm rounded-lg min-h-[47px] max-h-[47px] md:min-h-[60px] md:max-h-[60px] lg:min-h-[71px] lg:max-h-[71px] flex justify-between w-full max-w-[1280px] xl:mx-auto sticky">
+    <header className="bg-white shadow-sm rounded-lg min-h-[47px] max-h-[47px] md:min-h-[60px] md:max-h-[60px] lg:min-h-[71px] lg:max-h-[71px] flex justify-between w-full max-w-[1280px] xl:mx-auto sticky" role="navbar">
       <div className="flex w-full items-center justify-between px-6 py-3">
         <div className="flex items-center">
           <img src="/logos/simple.svg" alt="IMPHNEN Logo" className="h-8 w-auto" />
